@@ -1,58 +1,58 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class quickSort {
+	
+	public static List<Integer> sort(List<Integer> array) {
 
-	public static void sort(int[] array, int start, int end) {
+		List<Integer> left = new ArrayList<>();
+		List<Integer> right = new ArrayList<>();
 		
 		
-		if(start >= end) {
-			return;
+		if(array.size() < 1) {
+			return array;
 		}
 		
+		Integer pivot = array.get(0);
+		System.out.println(pivot);
 		
-		if(start <= end) {
 		
-			int pibot = array[(start + end) /2];
-			int s = start;
-			int e = end;
-			
-			while(s < e) {
-				while (array[s] < pibot) {
-					s ++;
-				}
-				while(array[e] > pibot) {
-					e --;
-				}
-				if(s <= e) {
-					int tmp = array[s];
-					array[s] = array[e];
-					array[e] = tmp;
-					s ++;
-					e --;
-				}
+		for(int i=1; i < array.size(); i++) {
+			if(array.get(i) <= pivot) {
+				left.add(array.get(i));
+			} else {
+				right.add(array.get(i));
 			}
-		
-			quickSort.sort(array, start, e);
-			quickSort.sort(array, s, end);
-		
+			System.out.println("left");
+			System.out.println(left);
+			System.out.println("right");
+			System.out.println(right);
+			
 		}
+		
+		
+		left = quickSort.sort(left);
+		right = quickSort.sort(right);
+		
+		left.add(pivot);
+		left.addAll(right);
+				
+		return left;
+			
 	}
 	
+
 	public static void main(String[] args) {
-		int[] test = {
-				10, 75, 32, 26, 95, 65, 88, 
-				34, 60, 25, 54, 62, 12
-		};
-		
-		quickSort.sort(test, 0, test.length-1);
-		
-		for(int i = 0; i < test.length; i++) {
-			System.out.println( (i+1) + ":" + test[i] );
+		List<Integer> test = new ArrayList<>();
+		test.addAll(Arrays.asList(5, 3, 2, 1, 4));
+
+		quickSort.sort(test);
+
+		for (int i = 0; i < test.size(); i++) {
+			System.out.println((i + 1) + ":" + test.get(i));
 		}
-		
+
 	}
-	
-	
-	
-	
-	
+
 }
